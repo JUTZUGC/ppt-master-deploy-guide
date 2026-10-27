@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "ppt-master-guide": {
+      "command": "node",
+      "args": [
+        "mcp-server.mjs"
+      ]
+    }
+  }
+}

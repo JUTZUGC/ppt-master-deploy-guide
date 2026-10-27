@@ -1,0 +1,126 @@
+{
+  "owner": "JUTZUGC",
+  "code": "JUTZUGC",
+  "project": {
+    "key": "ppt-master",
+    "nameCn": "PPT Master",
+    "repoName": "ppt-master-deploy-guide",
+    "oneLiner": "69.6k stars，MIT，把文档或主题变成原生可编辑的 PPTX，支持图表、动画、旁白与自有模板",
+    "officialRepo": "https://github.com/hugohe3/ppt-master",
+    "officialDocs": "https://github.com/hugohe3/ppt-master/blob/main/docs/getting-started.md",
+    "stars": "69.6k",
+    "license": "MIT",
+    "highlights": [
+      "69.6k stars：2025-12 建仓，不到一年冲到近 7 万",
+      "原生可编辑：输出 DrawingML 形状，不是一张贴图",
+      "图表表格可改数据：加 --native-charts-and-tables 生成 PowerPoint 原生图表对象",
+      "动画与转场：内置数十种转场和进入/强调/退出效果",
+      "旁白音频：从备注生成逐页配音，支持录制计时",
+      "自有模板：可以套用你手上的 .pptx 模板",
+      "多种画布：16:9 / 4:3 / 小红书 / 公众号 / 朋友圈 / 故事 / Banner / A4"
+    ],
+    "mcpSupport": "PPT Master 不是 MCP server，而是技能包 + Python 脚本，由 AI 客户端读取 SKILL.md 驱动；本仓库只负责安装，不注册 MCP。",
+    "webuiUrl": "",
+    "adapterPorts": "",
+    "collectedAt": "2026-10-27",
+    "verification": [
+      [
+        "实测下载 Release v6.7.3 的 ppt-master-skill-v6.7.3.zip 成功（21.6 MB，SHA256 0f709c0e...f95db3f）",
+        "已实测 2026-10-27"
+      ],
+      [
+        "解压确认 13,025 个文件，skills/ppt-master 内含 SKILL.md / references / scripts / templates / workflows",
+        "已实测 2026-10-27"
+      ],
+      [
+        "Python 3.12.7 虚拟环境执行 pip install -r requirements.txt 成功，python-pptx 1.0.2",
+        "已实测 2026-10-27"
+      ],
+      [
+        "实测用 svg_to_pptx.py 把 1 页 SVG 转成 PPTX（12.6 KB），postflight 状态 passed-with-warnings",
+        "已实测 2026-10-27"
+      ],
+      [
+        "解析产物：1 页 3 个原生形状（Rectangle / TextBox / Ellipse），确为可编辑 DrawingML 而非图片",
+        "已实测 2026-10-27"
+      ],
+      [
+        "仓库元数据核对：69,569 stars、5,427 forks、MIT、2025-12-10 建仓，最新 release v6.7.3",
+        "已核对 2026-10-27"
+      ],
+      [
+        "未实测完整 AI 对话生成流程（需接入大模型客户端）",
+        "说明 2026-10-27"
+      ]
+    ],
+    "deploy": {
+      "type": "script",
+      "requires": [
+        "python"
+      ],
+      "steps": [
+        "git clone --depth=1 https://github.com/hugohe3/ppt-master.git",
+        "cd ppt-master",
+        "python3 -m venv .venv",
+        ".venv/bin/pip install -r requirements.txt",
+        ".venv/bin/python skills/ppt-master/scripts/svg_to_pptx.py --help > /dev/null && echo \"转换脚本可用\"",
+        "echo \"安装完成：用 AI 客户端打开本目录，把源文件放进 projects/ 即可开始\""
+      ],
+      "stepsPs": [
+        "git clone --depth=1 https://github.com/hugohe3/ppt-master.git",
+        "Set-Location ppt-master",
+        "python -m venv .venv",
+        ".venv\\Scripts\\python.exe -m pip install -r requirements.txt",
+        ".venv\\Scripts\\python.exe skills\\ppt-master\\scripts\\svg_to_pptx.py --help | Out-Null; Write-Host '转换脚本可用'",
+        "Write-Host '安装完成：用 AI 客户端打开本目录，把源文件放进 projects/ 即可开始'"
+      ],
+      "source": "https://github.com/hugohe3/ppt-master#quick-start"
+    },
+    "pitfalls": [
+      "Windows 上命令找不到：安装 Python 时没勾 Add to PATH，重装并勾上",
+      "pip 安装慢或失败：换国内镜像，或先只装 `python-pptx` 等核心包试跑",
+      "直接调 `svg_to_pptx.py` 报 `spec_lock.md is required`：这个脚本是流水线末端，正常流程由 AI 先生成 spec；单独调试可加 `--enable-dangerous-nonconforming-svg-export`",
+      "找不到 SVG：脚本要求项目目录里有 `svg_output/`，直接传单个 svg 文件会报错",
+      "参数 `-s` 不是尺寸：它是源目录，画布用 `-f ppt169` 这类参数指定",
+      "导出后文字变图片：检查是否用了快速模式或非标准字体，按 FAQ 换字体重跑",
+      "图库里图片质量参差：配上 Pexels / Pixabay 的免费 Key"
+    ]
+  },
+  "gate": {
+    "allow": [
+      "dumate"
+    ],
+    "label": "百度搭子",
+    "url": "https://www.dumate.cn/",
+    "guideUrl": "https://github.com/JUTZUGC/ppt-master-deploy-guide",
+    "howToFix": [
+      "1. 打开 https://www.dumate.cn/ ，下载并安装「百度搭子」电脑端（Windows / macOS）",
+      "2. 用账号登录",
+      "3. 在对话窗口发送：你好，帮我从 github 部署 JUTZUGC/ppt-master-deploy-guide 到我的电脑上",
+      "4. 部署完成后，在同一对话窗口里继续使用"
+    ],
+    "hint": "请改用「百度搭子」部署后再使用；本工具没有网页版入口。",
+    "onError": "allow"
+  },
+  "keywords": [
+    "PPT Master 部署",
+    "PPT Master 安装",
+    "AI 生成 PPT",
+    "文档转 PPTX",
+    "可编辑 PPTX 生成",
+    "AI 做 PPT 开源",
+    "pptx 自动生成",
+    "PPT 动画 旁白",
+    "ppt-master 教程",
+    "Python 生成 PPT"
+  ],
+  "topics": [
+    "powerpoint",
+    "pptx",
+    "ai-agent",
+    "presentation",
+    "slides",
+    "python",
+    "aippt"
+  ]
+}
